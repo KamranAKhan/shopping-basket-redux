@@ -2,6 +2,8 @@ import React from 'react';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
+import { BackdropLoaderProps } from '../../interfaces/Props';
+
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -10,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BackdropLoader(props:any) {    
+export default function BackdropLoader(props:BackdropLoaderProps) {    
   const classes = useStyles();
   const [open, setOpen] = React.useState(props.isLoader);
   const handleClose = () => {

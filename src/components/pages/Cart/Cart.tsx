@@ -15,6 +15,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteFromCart, UpdateFromCart } from '../../../state_management/cartSlice';
 
+import { CartType, CartRootState } from '../../../interfaces/Props';
+
 const useStyles = makeStyles((theme) => ({
     root: {
         margin: '0 auto 0 auto'
@@ -140,7 +142,7 @@ function Cart() {
 
     //const { cart, deleteFromCart, updateFromCart } = useContext(CartContext);
     const dispatch = useDispatch();
-    let cart: any = useSelector((state: any) => {
+    let cart: Array<CartType> = useSelector((state: CartRootState) => {
         return state.cartCounter.cart;
     });
 
@@ -150,7 +152,7 @@ function Cart() {
 
     console.log("loadedCart", cart);
     const handleSizeChange = (event:any, productId:number) => {
-        let cartObj = cart.filter((x:any) => x.id === productId)[0];                
+        let cartObj = cart.filter((x) => x.id === productId)[0];                
 
         let newObj = {
             desc: cartObj.desc,
@@ -170,7 +172,7 @@ function Cart() {
     }
 
     const handleQuantityChange = (event:any, productId:number) => {
-        let cartObj = cart.filter((x:any) => x.id === productId)[0];
+        let cartObj = cart.filter((x) => x.id === productId)[0];
         let newObj = {
             desc: cartObj.desc,
             id: cartObj.id,
@@ -213,7 +215,7 @@ function Cart() {
                     ? <Grid container spacing={3}>
                         <Grid item xs={12} sm={12} md={8}>
                             {
-                                cart.map((item: any, index: number) => {
+                                cart.map((item, index) => {
                                     return (
                                         <Paper elevation={3} key={index} className={classes.cartPaper}>
                                             <Grid container >
@@ -240,7 +242,7 @@ function Cart() {
                                                                         }}
                                                                     >
                                                                         {
-                                                                            item.sizes.map((item: any, ind: number) => {
+                                                                            item.sizes.map((item, ind) => {
                                                                                 return (
                                                                                     <option value={item} key={ind}>{item}</option>
                                                                                 )
@@ -261,7 +263,7 @@ function Cart() {
                                                                         }}
                                                                     >
                                                                         {
-                                                                            item.sizes.map((item:any, ind:number) => {
+                                                                            item.sizes.map((item, ind) => {
                                                                                 return (
                                                                                     <option value={item} key={ind}>{item}</option>
                                                                                 )

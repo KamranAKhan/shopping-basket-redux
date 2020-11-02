@@ -16,7 +16,7 @@ import SnackbarAlert from '../widgets/SnackbarAlert';
 //import { CartContext } from '../../state_management/CartContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteFromCart } from '../../state_management/cartSlice';
-
+import { ShoeDetailsType, CartType, CartRootState } from '../../interfaces/Props';
 
 const useStyles = makeStyles((theme) => ({    
     root: {     
@@ -131,7 +131,7 @@ export default function CheckoutStepper() {
 
     // const { cart, deleteFromCart } = useContext(CartContext);
     const dispatch = useDispatch();
-    const cart: any = useSelector((state: any) => {
+    const cart: Array<CartType> = useSelector((state: CartRootState) => {
         return state.cartCounter.cart;
     });
 

@@ -18,7 +18,7 @@ import { addToCart } from '../../../state_management/cartSlice';
 import shoesList from '../../../data/ShoesList';
 import shoesListDetails from '../../../data/ShoesDetails';
 
-import { ShoesListType, ShoeDetailsType, CartType, CartRootState } from '../../../interfaces/Props';
+import { ShoeDetailsType, CartType, CartRootState } from '../../../interfaces/Props';
 
 
 const useStyles = makeStyles((theme) => ({

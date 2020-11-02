@@ -23,6 +23,7 @@ import { addToCart } from '../../../state_management/cartSlice';
 import { Paper } from '@material-ui/core'
 import Carousel from 'react-material-ui-carousel';
 
+import { ShoeDetailsType, CartType, CartRootState } from '../../../interfaces/Props';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -112,22 +113,20 @@ const useStyles = makeStyles((theme) => ({
 function ProductDetails() {
 
     const classes = useStyles();
-
-    // const { cart, addToCart } = useContext(CartContext);
+    
     const dispatch = useDispatch();
-    const cart = useSelector((state: any) => {
+    const cart: Array<CartType> = useSelector((state: CartRootState) => {
         return state.cartCounter.cart;
     });
 
     const [size, setSize] = useState(0)
     const [addToCartStatus, setAddToCartStatus] = useState(false);
-    //const [addToFavorite, setAddToFavorite] = useState(false);
 
     const { productId } = useParams();
-    let productDetail: any = shoesDetails.filter(x => x.id === Number(productId))[0];
+    let productDetail: ShoeDetailsType = shoesDetails.filter(x => x.id === Number(productId))[0];
 
     const handleSizeChange = (event: any) => {
-        setSize(event.target.value);
+        setSize(Number(event.target.value));
     }
 
     const handleAddToCart = () => {
@@ -147,14 +146,14 @@ function ProductDetails() {
         setAddToCartStatus(true);
     }
 
-    const handleAddToFavorite = (event: any) => {
+    const handleAddToFavorite = (event: React.FormEvent<EventTarget>) => {
         event.preventDefault();
         //setAddToFavorite(true);
     }
 
     const CheckProductIsInCart = (id: number) => {
         if (cart !== undefined && cart !== null && cart.length > 0) {
-            if (cart.filter((x:any) => x.id === id).length > 0)
+            if (cart.filter((x) => x.id === id).length > 0)
                 return true;
             else
                 return false;
@@ -164,8 +163,8 @@ function ProductDetails() {
         }
     }
 
-    const handleAddedNoAction = (event: any) => {
-        event.preventDefault();
+    const handleAddedNoAction = (event: React.FormEvent<EventTarget>) => {
+        event.preventDefault();        
     }
 
     return (
@@ -175,7 +174,7 @@ function ProductDetails() {
                 <Grid item xs={12} sm={4}>
                     <Carousel autoPlay={true} animation={'fade'} interval={2500} >
                         {
-                            productDetail.images.map((item: any, index: number) => {
+                            productDetail.images.map((item, index) => {
                                 return (
                                     <Paper className={classes.paperCarouselHeight} key={index}>
                                         <img src={item} style={{ maxWidth: '100%' }} alt={productDetail.name + '-img-' + index} />
@@ -201,14 +200,14 @@ function ProductDetails() {
                                 <Select
                                     native
                                     value={size}
-                                    onChange={handleSizeChange}
+                                    onChange={(handleSizeChange)}
                                     inputProps={{
                                         name: 'age',
                                         id: 'age-native-simple',
                                     }}
                                 >
                                     {
-                                        productDetail.sizes.map((item: any, index: number) => {
+                                        productDetail.sizes.map((item, index) => {
                                             return (
                                                 <option value={item} key={index}>{item}</option>
                                             )

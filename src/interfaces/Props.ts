@@ -34,3 +34,8 @@ export interface CartRootState {
         cart: Array<CartType>
     }
 }
+
+export interface BackdropLoaderProps {
+    isLoader: boolean,
+    setIsLoader: (x:boolean) => void
+}

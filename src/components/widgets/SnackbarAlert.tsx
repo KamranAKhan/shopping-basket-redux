@@ -20,7 +20,7 @@ export default function SnackbarAlert(props:any) {
     const classes = useStyles();    
     const [open, setOpen] = React.useState(props.status);    
 
-    const handleClose = (event:any, reason:any) => {
+    const handleClose = (event: React.FormEvent<EventTarget>, reason:any) => {
         if (reason === 'clickaway') {
             return;
         }

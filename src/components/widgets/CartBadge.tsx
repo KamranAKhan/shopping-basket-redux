@@ -6,8 +6,8 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 // cart state
 import { useSelector } from 'react-redux';
-
 import { useNavigate } from 'react-router-dom';
+import { CartRootState, CartType } from '../../interfaces/Props';
 
 
 const StyledBadge = withStyles((theme) => ({
@@ -22,7 +22,7 @@ const StyledBadge = withStyles((theme) => ({
 
 export default function CartBadge() {
     
-  const cart = useSelector( (state:any)=>{
+  const cart: Array<CartType> = useSelector( (state:CartRootState)=>{
       console.log(state)
       return state.cartCounter.cart;
   });
